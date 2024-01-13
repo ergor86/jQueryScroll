@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Curso de JQuery Completo</title>
+        <link rel="stylesheet" href="estilo.css">
+    </head>
+    <body>
+        <ul class="lista1">
+        </ul>
+        <script type="text/javascript" src="code.jquery.com_jquery-3.7.1.min.js"></script>
+        <script type="text/javascript" src="script.js"></script>
+        <script>
+            $(document).ready(function(){
+                let lista = $("ul.lista1");
+                adicionarItem(lista);
+                var lastScrollTop = 0, delta = 5;
+                $(window).scroll(function(){
+                    var nowScrollTop = $(this).scrollTop();
+                    var documentHeight = $(document).height();
+                    var windowHeight = $(this).height();
+
+                    if (nowScrollTop + windowHeight >= documentHeight) {
+                        // Você chegou ao final da página
+                        console.log("Você chegou ao final da página!");
+                        // Execute as ações que deseja quando atingir o final da página
+                        adicionarItem(lista);
+                    } else {
+                        if(Math.abs(lastScrollTop - nowScrollTop) >= delta){
+                            if (nowScrollTop > lastScrollTop){
+                                //console.log("oi");
+                                // ACTION ON
+                                // SCROLLING DOWN 
+                            } else {
+                                console.log("cima");
+                                // ACTION ON
+                                // SCROLLING UP 
+                            }
+                            lastScrollTop = nowScrollTop;
+                        }
+                    }
+                });
+            });
+
+            function adicionarItem(lista) {
+                var tamanho = lista.children("li").length;
+                for (var i = tamanho; i < tamanho + 10; i++) {
+                    // Crie uma tag de título (h1, h2, etc.) com base no valor de i
+                    var tagTitulo = "h" + (i + 1);
+                    
+                    // Crie a tag de título com jQuery e atribua o texto
+                    var titulo = $("<" + tagTitulo + ">").text("Item " + (i + 1)).css('color', retornaCor(i)).css('font-size', 40);
+
+                    // Crie o item da lista e adicione o título e o texto do item
+                    var item = $("<li>").append(titulo);
+
+                    // Adicione o item à lista
+                    lista.append(item);
+                }
+                lista
+            }
+            function retornaCor(num){
+                if (num >9){
+                    num = num % 9;
+                }
+                return coresDisponveis[num];
+            }
+            
+            const coresDisponveis = {
+                0 : 'Coral',
+                1 : 'Tomato',
+                2 : 'OrangeRed',
+                3 : 'DarkOrange',
+                4 : 'Orange',
+                5 : 'Gold',
+                6 : 'Yellow',
+                7 : 'Pink',
+                8 : 'LightPink',
+                9 : 'HotPink'
+            };
+        </script>
+    </body>
+</html>

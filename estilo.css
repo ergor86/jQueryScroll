@@ -1,0 +1,13 @@
+.links {
+    text-decoration: none;
+    color: red;
+}
+
+.fundo {
+    background-color: gray;
+}
+
+.inputText {
+    background-color: lightseagreen;
+    padding: 10px;
+}
